@@ -36,9 +36,7 @@ class Poll_List extends \WPGraphQL\Type\WPObjectType {
 
   public static function single_poll_action( $result, $source, $args, $context, $info, $type_name, $field_key, $field, $field_resolver ) {
     if ( 'polls' === $field_key && ! empty( $args['id'] ) ) {
-      $result = array(
-        Poll::get_poll_by_id( $args['id'] )
-      );
+      $result = Poll::get_poll_by_id( $args['id'] );
     }
 
     return $result;
