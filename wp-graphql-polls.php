@@ -11,6 +11,7 @@
  * Requires at least: 4.7.0
  * Requires PHP: 5.5
  * License: GPL v3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * 
  * @package WPGraphQL_Pools
  */
