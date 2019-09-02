@@ -54,7 +54,7 @@ class Poll {
     $max_answers  = (int) $poll_details->pollq_multiple;
     $expiry_date  = trim ( $poll_details->pollq_expiry );
     $active       = (int) $poll_details->pollq_active;
-    $voted        = self::has_user_voted();
+    $voted        = self::has_user_voted( $id );
     
     if ( empty( $expiry_date ) ) {
         $end_date = __( 'No Expiry', 'wp-polls' );
@@ -103,7 +103,7 @@ class Poll {
     return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->pollsa WHERE polla_qid = %d ORDER BY $order_by $sort_order", $id ) );
   }
 
-  public static function has_user_voted() {
+  public static function has_user_voted( $poll_id ) {
     $user_id = apply_filters( 'wp_graphql_polls_validate_user_id', null );
 
     if ( $user_id > 0 ) {
