@@ -58,7 +58,7 @@ class Poll_Vote {
           /**
            * Register a vote and returns a confirmation for the user
            */
-          return Vote::vote( $input['id'], $input['userId'], trim( $input['view'] ), trim ( $input['answers'] ) );
+          return Vote::vote( $input['id'], $input['userId'], trim ( $input['answers'] ) );
         }
       ]);
     }

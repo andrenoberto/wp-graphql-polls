@@ -3,7 +3,7 @@ namespace WPGraphQL\Polls;
 
 class Vote {
   
-  public static function vote( $poll_id, $user_id, $view, $answers ) {
+  public static function vote( $poll_id, $user_id, $answers ) {
     if ( self::validate_received_answers( $poll_id, $answers ) ) {
 
       if ( self::is_user_allowed_to_vote( $answers ) ) {
