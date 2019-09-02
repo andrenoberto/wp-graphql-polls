@@ -62,7 +62,6 @@ class Poll {
         $end_date = self::format_date_from_mysql( $poll_expiry );
     }
 
-    list( $order_by, $sort_order ) = _polls_get_ans_sort();
     $answers  = self::get_poll_answers_by_id( $id );
 
     foreach ( $answers as $answer ) {
@@ -100,6 +99,7 @@ class Poll {
 
   public static function get_poll_answers_by_id ( $id ) {
     global $wpdb;
+    list( $order_by, $sort_order ) = _polls_get_ans_sort();
     return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->pollsa WHERE polla_qid = %d ORDER BY $order_by $sort_order", $id ) );
   }
 
