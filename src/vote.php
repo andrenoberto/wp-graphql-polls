@@ -8,7 +8,7 @@ class Vote {
 
       if ( self::is_user_allowed_to_vote( $answers ) ) {
 
-        if ( self::is_poll_open() ) {
+        if ( self::is_poll_open( $poll_id ) ) {
 
           if ( self::has_user_sent_more_answers_than_allowed( $poll_id, $answers ) ) {
             return self::get_user_exceeded_poll_max_answers_error_response( $poll_id );
@@ -116,7 +116,7 @@ class Vote {
 
   public static function is_poll_open( $id ) {
     global $wpdb;
-    $number_of_open_polls = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $wpdb->pollsq WHERE pollq_id = %d AND pollq_active = 1", $poll_id ) );
+    $number_of_open_polls = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $wpdb->pollsq WHERE pollq_id = %d AND pollq_active = 1", $id ) );
 
     return $number_of_open_polls > 0;
   }
