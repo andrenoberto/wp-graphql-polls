@@ -14,8 +14,6 @@ class Vote {
             return self::get_user_exceeded_poll_max_answers_error_response( $poll_id );
           }
 
-          $poll_logging_method = self::get_poll_logging_method();
-
           if ( self::validate_user() ) {
             return self::get_user_unauthorized_error_response();
           }
