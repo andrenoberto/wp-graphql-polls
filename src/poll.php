@@ -18,7 +18,7 @@ class Poll {
     $poll               = array();
     $poll_from_database = self::get_polls_from_database_by_id( $id );
 
-    if ( self::is_poll_available() ) {
+    if ( self::is_poll_available( $id ) ) {
       $poll[] = self::get_graphql_poll_by_id( $id );
     }
 
@@ -113,7 +113,7 @@ class Poll {
     return false;
   }
 
-  public static function is_poll_available() {
+  public static function is_poll_available( $id ) {
     $poll_from_database = self::get_polls_from_database_by_id( $id );
 
     return ! ! $poll_from_database;
