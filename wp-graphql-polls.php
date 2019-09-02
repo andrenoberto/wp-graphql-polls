@@ -4,7 +4,7 @@
  * Plugin URI:
  * Description: A GraphQL interface to be used with WP-Polls plugins
  * Author: WPGraphQL, Andre Noberto, Adrien Becuwe, 7aduta, Lester Chan
- * Author URI:
+ * Author URI: https://github.com/andrenoberto
  * Text Domain: wp-graphql-polls
  * Domain Path: /languages
  * Version: 0.1
