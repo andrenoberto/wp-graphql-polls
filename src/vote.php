@@ -14,12 +14,12 @@ class Vote {
             return self::get_user_exceeded_poll_max_answers_error_response( $poll_id );
           }
 
-          if ( self::validate_user() ) {
+          if ( self::validate_user( $user_id ) ) {
             return self::get_user_unauthorized_error_response();
           }
 
-          if ( self::has_user_voted( $poll_id, $user_id ) ) {
-            self::set_cookies_when_enabled();
+          if ( ! self::has_user_voted( $poll_id, $user_id ) ) {
+            self::set_cookies_when_enabled( $poll_id );
             self::update_answers_number_of_votes( $poll_id, $answers );
             $poll_successfully_updated = self::update_poll_statistics( $poll_id, $answers );
 
@@ -213,7 +213,7 @@ class Vote {
     return (int) get_option( 'poll_cookielog_expiry' );
   }
 
-  public static function validate_user() {
+  public static function validate_user( $user_id ) {
     $poll_logging_method = self::get_poll_logging_method();
 
     if ( $poll_logging_method === 4 ) {
@@ -245,7 +245,7 @@ class Vote {
     return $username;
   }
 
-  public static function set_cookies_when_enabled() {
+  public static function set_cookies_when_enabled( $poll_id ) {
     $poll_logging_method = self::get_poll_logging_method();
 
     if ( $poll_logging_method === 1 || $poll_logging_method === 3 ) {
@@ -268,8 +268,8 @@ class Vote {
     $normalized_answers = self::get_unique_ids_array_from_string( $answers );
     $index = 0;
     
-    foreach ( $normalized_answers as $answers_id ) {
-      if ( self::update_answer_number_of_votes( $poll_id, $answers_id ) ) {
+    foreach ( $normalized_answers as $answer_id ) {
+      if ( self::update_answer_number_of_votes( $poll_id, $answer_id ) ) {
         unset( $normalized_answers[$index] );
       }
 
@@ -285,6 +285,7 @@ class Vote {
   }
 
   public static function update_poll_statistics( $poll_id, $answers ) {
+    global $wpdb;
     $normalized_answers       = self::get_unique_ids_array_from_string( $answers );
     $update_operation_result  = $wpdb->query( "UPDATE $wpdb->pollsq SET pollq_totalvotes = (pollq_totalvotes+" . count( $normalized_answers ) . "), pollq_totalvoters = (pollq_totalvoters + 1) WHERE pollq_id = $poll_id AND pollq_active = 1" );
 
@@ -292,6 +293,7 @@ class Vote {
   }
 
   public static function insert_user_votes( $poll_id, $answers, $user_id ) {
+    global $wpdb;
     $normalized_answers = self::get_unique_ids_array_from_string( $answers );
     $vote_details       = self::get_vote_details_from_user_id( $user_id );
 
@@ -301,10 +303,10 @@ class Vote {
         array(
           'pollip_qid'        => $poll_id,
           'pollip_aid'        => $answer_id,
-          'pollip_ip'         => $user_ip,
-          'pollip_host'       => $user_host,
-          'pollip_timestamp'  => $vote_timestamp,
-          'pollip_user'       => $username,
+          'pollip_ip'         => $vote_details['user_ip'],
+          'pollip_host'       => $vote_details['user_host'],
+          'pollip_timestamp'  => $vote_details['vote_timestamp'],
+          'pollip_user'       => $vote_details['username'],
           'pollip_userid'     => $user_id
         ),
         array(
