@@ -109,7 +109,7 @@ class Vote {
 
   public static function get_number_of_allowed_answers_from_poll_id( $id ) {
     global $wpdb;
-    $poll = $wpdb->get_row( $wpdb->prepare( "SELECT pollq_multiple FROM $wpdb->pollsq WHERE pollq_id = %d AND pollq_active = 1", $poll_id ) );
+    $poll = $wpdb->get_row( $wpdb->prepare( "SELECT pollq_multiple FROM $wpdb->pollsq WHERE pollq_id = %d AND pollq_active = 1", $id ) );
     
     return $poll->pollq_multiple || 1;
   }
