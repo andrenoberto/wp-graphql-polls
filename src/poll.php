@@ -107,7 +107,7 @@ class Poll {
     $user_id = apply_filters( 'wp_graphql_polls_validate_user_id', null );
 
     if ( $user_id > 0 ) {
-      return Vote::check_if_user_has_voted( $poll_id, $user_id );
+      return Vote::has_user_voted_in_poll( $poll_id, $user_id );
     }
 
     return false;
