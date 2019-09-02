@@ -131,7 +131,7 @@ class Vote {
     $number_of_allowed_answers  = self::get_number_of_allowed_answers_from_poll_id( $poll_id );
     $number_of_received_answers = self::get_number_of_received_answers( $answers );
 
-    return (int) $number_of_allowed_answers < (int) $answers;
+    return $number_of_received_answers > $number_of_allowed_answers;
   }
 
   public static function get_user_exceeded_poll_max_answers_error_response( $poll_id ) {
