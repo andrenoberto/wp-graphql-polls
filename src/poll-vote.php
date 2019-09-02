@@ -38,10 +38,6 @@ class Poll_Vote {
             'type' => Types::non_null( Types::int() ),
             'description' => __( 'The user id that are voting', 'wp-graphql-polls' )
           ],
-          'view' => [
-            'type' => Types::non_null( Types::string() ),
-            'description' => __( 'The type of view you want to get the result from', 'wp-graphql-polls' )
-          ],
           'answers' => [
             'type' => Types::non_null( Types::string() ),
             'description' => __( 'The answers you are voting.', 'wp-graphql-polls' )
