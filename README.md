@@ -18,11 +18,11 @@ It requires you to have WP-Polls plugin first in order to work. You can get it <
 
 ## Voting
 
-This plugin add a new `vote` mutation to the WPGraphQL Schema.
+This plugin adds a new `vote` mutation to the WPGraphQL Schema.
 
 This can be used like so:
 
-```
+```json
 mutation PollVote {
   vote(input: {
     clientMutationId: "Vote",
@@ -46,7 +46,7 @@ It returns a status code and a respective message after the operation has been e
 
 You can query polls by doing the following query:
 
-```
+```json
 query GetAllPolls {
   polls {
     id
@@ -77,7 +77,7 @@ query GetAllPolls {
 
 If you need to query an specific poll you can do it by passing the poll `id` through the query, like the example bellow:
 
-```
+```json
 query GetPollById {
   polls(id: 1) {
     ...
