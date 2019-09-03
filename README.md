@@ -22,7 +22,7 @@ This plugin adds a new `vote` mutation to the WPGraphQL Schema.
 
 This can be used like so:
 
-```
+```graphql
 mutation PollVote {
   vote(input: {
     clientMutationId: "Vote",
@@ -46,7 +46,7 @@ It returns a status code and a respective message after the operation has been e
 
 You can query polls by doing the following query:
 
-```
+```graphql
 query GetAllPolls {
   polls {
     id
