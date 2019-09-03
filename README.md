@@ -2,7 +2,7 @@
 
 # WPGraphQL Polls
 
-This plugin extends the [WPGraphQL][wp-graphql-url] & [WP-Polls][wp-polls-url] plugins to provide and provides the interface for consuming the WP-Polls through queries and mutations.
+This plugin extends the [WPGraphQL][wp-graphql-url] & [WP-Polls][wp-polls-url] plugins and provide the interface for consuming the WP-Polls through queries and mutations.
 
 This plugin is possible because of the work of [Adrien Becuwe][adrien-becuwe-url] & [7aduta][7aduta-url]. Please, don't forget to checkout their respective work.
 
